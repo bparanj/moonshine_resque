@@ -39,20 +39,45 @@ describe "A manifest with the Resque plugin" do
         :user => 'rails'
       })
       @manifest.configure({:resque => {:web => {:username => "test",:password => "test"}}})
-      @manifest.resque_web
     end
     
     it "should install the resque web config.ru" do
+      @manifest.resque_web
       @manifest.files['/srv/app/shared/resque_web/config.ru'].should_not be(nil)
     end
     
     it "should install the resque web apache vhost" do
+      @manifest.resque_web
       @manifest.files['/etc/apache2/sites-available/resque_web'].should_not be(nil)
     end
     
     it "should ensure that thin and sinatra are installed" do
+      @manifest.resque_web
       @manifest.packages.keys.should include('thin')
+      @manifest.packages['thin'].ensure.should  == :latest
       @manifest.packages.keys.should include('sinatra')
+      @manifest.packages['sinatra'].ensure.should  == :latest
+    end
+    
+    it "should install specified version of thin or sinatra" do
+      @manifest.configure({
+        :resque => {
+          :web => {
+            :gems => {
+              :thin => {:version  => '1.2.3'}, 
+              :sinatra => {:version => '4.5.6'}              
+            }
+          }
+        }
+      })
+      @manifest.resque_web
+      @manifest.packages['thin'].ensure.should  == '1.2.3'
+      @manifest.packages['sinatra'].ensure.should  == '4.5.6'
+    end
+    
+    it "should add resque web with no config passed" do
+      @manifest.configure({:resque => {}})
+      @manifest.resque_web
     end
   end
 end

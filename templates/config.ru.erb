@@ -5,8 +5,8 @@ require 'resque/server'
 use Rack::ShowExceptions
 
 # Set the AUTH env variable to your basic auth password to protect Resque.
-AUTH_PASSWORD = "<%= configuration[:resque][:web][:password] %>"
-AUTH_USERNAME = "<%= configuration[:resque][:web][:username] %>"
+AUTH_PASSWORD = "<%= options[:password] %>"
+AUTH_USERNAME = "<%= options[:username] %>"
 
 if AUTH_PASSWORD && AUTH_USERNAME
   Resque::Server.use Rack::Auth::Basic do |username, password|

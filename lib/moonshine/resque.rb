@@ -7,9 +7,17 @@ module Moonshine
       gem 'yajl-ruby', :ensure => :installed
     end
 
-    def resque_web(options = {})
+    def resque_web(sent_options = {})
+      default_options = {
+        :gems => {
+          :thin => {:version => :latest},
+          :sinatra => {:version => :latest}          
+        }
+      }
+      options = default_options.merge(configuration[:resque][:web])
+      
       %w(thin sinatra).each do |g|
-        gem g, :ensure => :installed
+        package g, :ensure => options[:gems][g.to_sym][:version], :provider => :gem
       end
       
       directories = [
