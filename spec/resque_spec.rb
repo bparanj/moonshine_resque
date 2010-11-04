@@ -38,7 +38,7 @@ describe "A manifest with the Resque plugin" do
         :passenger => {:rack_env => 'testing'},
         :user => 'rails'
       })
-      @manifest.configure({:resque => {:web => {:username => "test",:password => "test"}}})
+      @manifest.configure({:resque => {:web => {:username => "test",:password => "test", :port => "1234"}}})
     end
     
     it "should install the resque web config.ru" do

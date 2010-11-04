@@ -1,7 +1,7 @@
-NameVirtualHost *:<%= options[:port] || "8282" %>
-Listen <%= options[:port] || "8282" %>
+NameVirtualHost *:<%= configuration[:resque][:web][:port] || "8282" %>
+Listen <%= configuration[:resque][:web][:port] || "8282" %>
 
-<VirtualHost *:<%= options[:port] || "8282" %>>
+<VirtualHost *:<%= configuration[:resque][:web][:port] || "8282" %>>
   ServerName <%= configuration[:domain] || (Facter.to_hash["hostname"] + '.' + Facter.to_hash["domain"]) %>
   DocumentRoot <%= configuration[:deploy_to] + "/shared/resque_web/public" %>
   RackEnv <%= configuration[:passenger][:rack_env] || ENV['RACK_ENV'] || 'production' %>
