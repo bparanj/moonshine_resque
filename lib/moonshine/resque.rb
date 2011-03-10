@@ -14,8 +14,8 @@ module Moonshine
           :sinatra => {:version => :latest}          
         }
       }
-      options = default_options.merge(configuration[:resque][:web])
-      
+      options = HashWithIndifferentAccess.new(default_options.merge(configuration[:resque][:web]))
+
       %w(thin sinatra).each do |g|
         package g, :ensure => options[:gems][g.to_sym][:version], :provider => :gem
       end

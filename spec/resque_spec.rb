@@ -46,11 +46,19 @@ describe "A manifest with the Resque plugin" do
       @manifest.files['/srv/app/shared/resque_web/config.ru'].should_not be(nil)
     end
     
+    it "should configure a username and password for resque web" do
+      @manifest.configure(:resque => {:web => {:username => 'resque', :password => 'sekrit'}})
+      @manifest.resque_web
+      config_ru = @manifest.files['/srv/app/shared/resque_web/config.ru']['content']
+      config_ru.should include('AUTH_USERNAME = "resque"')
+      config_ru.should include('AUTH_PASSWORD = "sekrit"')
+    end
+
     it "should install the resque web apache vhost" do
       @manifest.resque_web
       @manifest.files['/etc/apache2/sites-available/resque_web'].should_not be(nil)
     end
-    
+
     it "should ensure that thin and sinatra are installed" do
       @manifest.resque_web
       @manifest.packages.keys.should include('thin')
