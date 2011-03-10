@@ -59,6 +59,17 @@ describe "A manifest with the Resque plugin" do
       @manifest.files['/etc/apache2/sites-available/resque_web'].should_not be(nil)
     end
 
+    it "should set a default port for the apache vhost" do
+      @manifest.resque_web
+      @manifest.files['/etc/apache2/sites-available/resque_web']['content'].should include('8282')
+    end
+
+    it "should allow a custom port for the appache vhost" do
+      @manifest.configure(:resque => {:web => {:port => '1234'}})
+      @manifest.resque_web
+      @manifest.files['/etc/apache2/sites-available/resque_web']['content'].should include('1234')
+    end
+
     it "should ensure that thin and sinatra are installed" do
       @manifest.resque_web
       @manifest.packages.keys.should include('thin')
