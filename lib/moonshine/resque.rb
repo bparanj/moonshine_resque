@@ -7,6 +7,10 @@ module Moonshine
       gem 'yajl-ruby', :ensure => :installed
     end
 
+  end
+
+  module ResqueWeb
+
     def resque_web(sent_options = {})
       default_options = {
         :gems => {
