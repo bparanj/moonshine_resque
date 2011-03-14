@@ -75,7 +75,7 @@ describe "A manifest with the Resque plugin" do
       @manifest.packages.keys.should include('thin')
       @manifest.packages['thin'].ensure.should  == :latest
       @manifest.packages.keys.should include('sinatra')
-      @manifest.packages['sinatra'].ensure.should  == :latest
+      @manifest.packages['sinatra'].ensure.should  == '1.1.3'
     end
     
     it "should install specified version of thin or sinatra" do
