@@ -70,10 +70,14 @@ describe "A manifest with the Resque plugin" do
       @manifest.files['/etc/apache2/sites-available/resque_web']['content'].should include('1234')
     end
 
-    it "should ensure that thin and sinatra are installed" do
+    it "should ensure that the latest version of thin is installed" do
       @manifest.resque_web
       @manifest.packages.keys.should include('thin')
       @manifest.packages['thin'].ensure.should  == :latest
+    end
+
+    it "should ensure that version 1.1.3 of sinatra is installed" do
+      @manifest.resque_web
       @manifest.packages.keys.should include('sinatra')
       @manifest.packages['sinatra'].ensure.should  == '1.1.3'
     end
