@@ -1,9 +1,10 @@
 class MoonshineResqueGenerator < Rails::Generators::Base
   desc <<-INTRO
-- To monitor Resque with God, generate the configuration file 
-  and install moonshine_god.
 
-  script/rails g moonshine_resque_god
+To monitor Resque with God, generate the configuration file 
+and install moonshine_god.
+
+  script/rails g moonshine_resque --with-god=true
 
 INTRO
 
