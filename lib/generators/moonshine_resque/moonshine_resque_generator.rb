@@ -11,8 +11,7 @@ class MoonshineResqueGenerator < Rails::Generators::Base
     template "resque.rb", "config/initializers/resque.rb"
   end
 
-      intro = <<-INTRO
-
+  intro = <<-INTRO
 
 - Be sure to install moonshine_redis to use moonshine_resque.
 
@@ -27,7 +26,5 @@ class MoonshineResqueGenerator < Rails::Generators::Base
 
 INTRO
       
-      puts intro
-    end
-  end
+  puts intro if File.basename($0) == 'generate'
 end

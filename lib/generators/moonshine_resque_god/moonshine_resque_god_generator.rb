@@ -10,7 +10,7 @@ class MoonshineResqueGodGenerator < Rails::Generators::Base
     template "resque.god", "config/god/resque.god"
   end
 
-      intro = <<-INTRO
+  intro = <<-INTRO
 
 - To monitor Resque with God, install moonshine_god.
 
@@ -33,8 +33,6 @@ workers on deploy, as well as increasing or decreasing the number of
 Resque workers.
 
 INTRO
-      
-      puts intro
-    end
-  end
+
+  puts intro if File.basename($0) == 'generate'    
 end
