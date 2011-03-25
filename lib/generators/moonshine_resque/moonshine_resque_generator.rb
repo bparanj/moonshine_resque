@@ -8,11 +8,9 @@ class MoonshineResqueGenerator < Rails::Generators::Base
   def manifest
     template "resque.yml", "config/resque.yml"
     template "resque.rb", "config/initializers/resque.rb"
-
-    if yes?("Would you like to install Resque?")
-      gem("resque")
-      gem("redis")
-    end
+    
+    gem("resque")
+    gem("redis")
   end
 
   intro = <<-INTRO
