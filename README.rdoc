@@ -3,10 +3,16 @@
 A Moonshine[http://github.com/railsmachine/moonshine] plugin for installing and
 managing resque[http://github.com/defunkt/resque].
 
-== Instructions
+== Rails 2 Installation
   script/plugin install git://github.com/railsmachine/moonshine_redis.git
   script/plugin install git://github.com/railsmachine/moonshine_resque.git
   script/generate moonshine_resque
+
+== Rails 3 Installation
+  script/plugin install git://github.com/railsmachine/moonshine_resque.git
+  script/rails g moonshine_resque --with-god=true
+
+== Configuration
   
 * Configure settings in your moonshine.yml (Or use configure() in manifest as usual)
 * Add this to the end of your Rakefile:
@@ -38,8 +44,11 @@ interface from your domain and the port, http://example.com:5678
 == Monitor Resque with God
 Generate the configuration file and install the Moonshine_God plugin:
   
+  # Rails 2
   script/generate moonshine_resque_god
   script/plugin install git://github.com/railsmachine/moonshine_god.git
+  # Rails 3
+  script/rails g moonshine_resque --with-god=true
 
 Modify the configuration file (config/god/resque.god) as needed.
 
