@@ -46,21 +46,22 @@ Modify the configuration file (config/god/resque.god) as needed.
 You'll also want to add the `:resque` role to all servers using it.
 For example:
 
-    # config/deploy/production.rb
-    server 'worker1.myapp.com', :app, :resque
+  # config/deploy/production.rb
+  server 'worker1.myapp.com', :app, :resque
 
 If you're using Resque with God this way, you also have access to
 some Capistrano tasks:
 
-    cap god:resque:restart # restart resque
-    cap god:resque:start   # start resque
-    cap god:resque:stop    # stop resque
-    cap god:resque:status  # show status of resque
+  cap god:resque:restart # restart resque
+  cap god:resque:start   # start resque
+  cap god:resque:stop    # stop resque
+  cap god:resque:status  # show status of resque
 
-We also recommend having Moonshine automatically restart Resque on deploys:
+We also strongly recommend having Moonshine automatically restart Resque on
+deploys:
 
-    # config/deploy.rb
-    before 'god:restart', 'god:resque:stop'
+  # config/deploy.rb
+  before 'god:restart', 'god:resque:stop'
 
 This is a great way to handle automatically reloading new app code into your
 workers on deploy, as well as increasing or decreasing the number of
