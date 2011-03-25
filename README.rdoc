@@ -60,7 +60,7 @@ some Capistrano tasks:
 We also recommend having Moonshine automatically restart Resque on deploys:
 
     # config/deploy.rb
-    before 'god:restart', 'resque:stop'
+    before 'god:restart', 'god:resque:stop'
 
 This is a great way to handle automatically reloading new app code into your
 workers on deploy, as well as increasing or decreasing the number of
