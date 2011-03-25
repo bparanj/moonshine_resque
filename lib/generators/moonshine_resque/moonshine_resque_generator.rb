@@ -14,17 +14,26 @@ INTRO
     @_moonshine_resque_source_root ||= Pathname.new(__FILE__).dirname.join('..', '..', '..', 'generators', 'moonshine_resque', 'templates')
   end
 
+  def self.god_source_root
+    @_moonshine_resque_god_source_root ||= Pathname.new(__FILE__).dirname.join('..', '..', '..', 'generators', 'moonshine_resque_god', 'templates')
+  end
+
   def manifest
     plugin("moonshine_redis", :git => "git://github.com/railsmachine/moonshine_redis.git")
     template "resque.yml", "config/resque.yml"
-    template "resque.rb", "config/initializers/resque.rb"
     
     gem("resque")
     gem("redis")
 
+    rakefile("resque_tasks.rake") do
+      "require 'resque/tasks'"
+    end
+
+    initializer("resque.rb", File.read(File.join(MoonshineResqueGenerator.source_root, 'resque.rb')))
+
     if options[:with_god]
       plugin("moonshine_god", :git => "git://github.com/railsmachine/moonshine_god.git")
-      template "resque.god", "config/god/resque.god"
+      template File.join(MoonshineResqueGenerator.god_source_root, 'resque.god'), "config/god/resque.god"
     end
   end
 end
