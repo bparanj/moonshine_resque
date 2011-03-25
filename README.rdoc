@@ -17,14 +17,15 @@ managing resque[http://github.com/defunkt/resque].
 * Configure settings in your moonshine.yml (Or use configure() in manifest as usual)
 * Add this to the end of your Rakefile:
 
-    require 'resque/tasks'
+  # Rails 2 only, Rails 3 does it for you in lib/tasks/resque_tasks.rake
+  require 'resque/tasks'
 
 * Include the recipes in your Moonshine manifest
     
-    recipe :redis           # requires moonshine_redis
-    recipe :resque
-    recipe :resque_web      # optional
-    recipe :god             # optional, requires moonshine_god to monitor Resque with god
+  recipe :redis           # requires moonshine_redis
+  recipe :resque
+  recipe :resque_web      # optional
+  recipe :god             # optional, requires moonshine_god to monitor Resque with god
 
 == Resque Web Interface
 
