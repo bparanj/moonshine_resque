@@ -6,6 +6,7 @@ class MoonshineResqueGodGenerator < Rails::Generators::Base
   end
 
   def manifest
+    plugin("moonshine_god", :git => "git://github.com/railsmachine/moonshine_god.git")
     template "resque.god", "config/god/resque.god"
   end
 
