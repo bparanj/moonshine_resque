@@ -6,6 +6,7 @@ class MoonshineResqueGenerator < Rails::Generators::Base
   end
 
   def manifest
+    plugin("moonshine_redis", :git => "git://github.com/railsmachine/moonshine_redis.git")
     template "resque.yml", "config/resque.yml"
     template "resque.rb", "config/initializers/resque.rb"
     
