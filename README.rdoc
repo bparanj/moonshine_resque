@@ -42,3 +42,21 @@ Generate the configuration file and install the Moonshine_God plugin:
   script/plugin install git://github.com/railsmachine/moonshine_god.git
 
 Modify the configuration file (config/god/resque.god) as needed.
+
+If you're using Resque with God this way, you also have access to
+some Capistrano tasks:
+
+    cap god:resque:restart # restart resque
+    cap god:resque:start   # start resque
+    cap god:resque:stop    # stop resque
+    cap god:resque:status  # show status of resque
+
+These tasks assume you've added the `:resque` role to the servers using Resque.
+
+You may even go so far as to add a hook to have your Resque workers restart on
+deploys:
+
+    before 'god:restart', 'resque:stop'
+
+This is a great way to handle automatically increasing or decreasing the
+number of Resque workers.
