@@ -6,7 +6,6 @@ class MoonshineResqueGodGenerator < Rails::Generators::Base
   end
 
   def manifest
-    directory File.join("config", "god")
     template "resque.god", "config/god/resque.god"
   end
 
