@@ -1,5 +1,13 @@
 class MoonshineResqueGenerator < Rails::Generators::Base
-  desc Pathname.new(__FILE__).dirname.join('..', '..', '..', 'generators', 'moonshine_resque', 'USAGE').read
+  desc <<-INTRO
+- To monitor Resque with God, generate the configuration file 
+  and install moonshine_god.
+
+  script/rails g moonshine_resque_god
+
+INTRO
+
+  class_option :use_god
 
   def self.source_root
     @_moonshine_resque_source_root ||= Pathname.new(__FILE__).dirname.join('..', '..', '..', 'generators', 'moonshine_resque', 'templates')
@@ -12,22 +20,10 @@ class MoonshineResqueGenerator < Rails::Generators::Base
     
     gem("resque")
     gem("redis")
+
+    if use_god?
+      plugin("moonshine_god", :git => "git://github.com/railsmachine/moonshine_god.git")
+      template "resque.god", "config/god/resque.god"
+    end
   end
-
-  intro = <<-INTRO
-
-- Be sure to install moonshine_redis to use moonshine_resque.
-
-  script/plugin install git://github.com/railsmachine/moonshine_redis.git
-
-- To monitor Resque with God, generate the configuration file 
-  and install moonshine_god.
-
-  script/generate moonshine_resque_god
-  script/plugin install git://github.com/railsmachine/moonshine_god.git
-
-
-INTRO
-      
-  puts intro if File.basename($0) == 'generate'
 end
