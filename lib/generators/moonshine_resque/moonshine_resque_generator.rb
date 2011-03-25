@@ -7,7 +7,7 @@ class MoonshineResqueGenerator < Rails::Generators::Base
 
 INTRO
 
-  class_option :use_god
+  class_option :with_god, :default => false, :type => :boolean
 
   def self.source_root
     @_moonshine_resque_source_root ||= Pathname.new(__FILE__).dirname.join('..', '..', '..', 'generators', 'moonshine_resque', 'templates')
@@ -21,7 +21,7 @@ INTRO
     gem("resque")
     gem("redis")
 
-    if use_god?
+    if options[:with_god]
       plugin("moonshine_god", :git => "git://github.com/railsmachine/moonshine_god.git")
       template "resque.god", "config/god/resque.god"
     end
