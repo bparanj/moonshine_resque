@@ -49,7 +49,7 @@ Generate the configuration file and install the Moonshine_God plugin:
   script/generate moonshine_resque_god
   script/plugin install git://github.com/railsmachine/moonshine_god.git
   # Rails 3
-  script/rails g moonshine_resque --with-god=true
+  script/rails g moonshine_resque --with-god
 
 Modify the configuration file (config/god/resque.god) as needed.
 
