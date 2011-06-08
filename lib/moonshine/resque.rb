@@ -11,11 +11,7 @@ module Moonshine
       default_options = {
         :gems => {
           :thin => {:version => :latest},
-          # Resque::Server url method conflicts with Sinatra 1.2.0
-          # Install version 1.1.3 by default for now
-          # https://github.com/defunkt/resque/issues#issue/221
-          # https://github.com/defunkt/resque/pull/225
-          :sinatra => {:version => '1.1.3'}
+          :sinatra => {:version => :latest}
         }
       }
       options = HashWithIndifferentAccess.new(default_options.merge(configuration[:resque][:web]))
