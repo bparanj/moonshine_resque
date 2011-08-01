@@ -9,7 +9,7 @@ managing resque[http://github.com/defunkt/resque].
   script/generate moonshine_resque
 
 == Rails 3 Installation
-  script/plugin install git://github.com/railsmachine/moonshine_resque.git
+  script/rails plugin install git://github.com/railsmachine/moonshine_resque.git
   script/rails g moonshine_resque --with-god
 
 == Configuration
