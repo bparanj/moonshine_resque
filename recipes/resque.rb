@@ -17,7 +17,34 @@ namespace :god do
     
     desc "show status of resque workers"
     task :status, :roles => :resque do
-      sudo "god status resque"
+      sudo "god status resque || true"
     end
+
+    desc "unmonitor resque workers"
+    task :unmonitor, :roles => :resque do
+      sudo "god unmonitor resque"
+    end
+
+    desc "monitor resque workers"
+    task :monitor, :roles => :resque do
+      sudo "god monitor resque"
+    end
+
+    desc "unmonitor resque, then send QUIT signal to exit after current job is processed"
+    task :quit, :roles => :resque do
+      sudo "god unmonitor resque"
+      sudo "god signal resque QUIT"
+    end
+
+    desc "pause working new resque jobs without killing the process."
+    task :pause, :roles => :resque do
+      sudo "god signal resque USR2"
+    end
+
+    desc "resume working jobs after receving a pause command."
+    task :resume, :roles => :resque do
+      sudo "god signal resque CONT"
+    end
+
   end
 end
