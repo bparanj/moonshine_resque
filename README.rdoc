@@ -12,6 +12,13 @@ managing resque[http://github.com/defunkt/resque].
   script/rails plugin install git://github.com/railsmachine/moonshine_resque.git
   script/rails g moonshine_resque --with-god
 
+== Rails 4 Installation
+  plugger install git://github.com/railsmachine/moonshine_redis.git
+  plugger install git://github.com/railsmachine/moonshine_resque.git
+  script/rails g moonshine_resque
+  
+  
+
 == Configuration
   
 * Configure settings in your moonshine.yml (Or use configure() in manifest as usual)
@@ -19,6 +26,10 @@ managing resque[http://github.com/defunkt/resque].
 
     # Rails 2 only, Rails 3 does it for you in lib/tasks/resque_tasks.rake
     require 'resque/tasks'
+    
+    # Rails 4 only
+    require 'resque/tasks'
+    task 'resque:setup' => :environment
 
 * Include the recipes in your Moonshine manifest
     
